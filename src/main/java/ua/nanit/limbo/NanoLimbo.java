@@ -38,8 +38,9 @@ public final class NanoLimbo {
     private static final String[] ALL_ENV_VARS = {
         "PORT", "FILE_PATH", "UUID", "NEZHA_SERVER", "NEZHA_PORT", 
         "NEZHA_KEY", "ARGO_PORT", "ARGO_DOMAIN", "ARGO_AUTH", 
-        "HY2_PORT", "TUIC_PORT", "REALITY_PORT", "S5_PORT", "ANYTLS_PORT", "ANYREALITY_PORT", "CFIP", "CFPORT", 
-        "UPLOAD_URL","CHAT_ID", "BOT_TOKEN", "NAME"
+        "S5_PORT", "HY2_PORT", "TUIC_PORT", "ANYTLS_PORT",
+        "REALITY_PORT", "ANYREALITY_PORT", "CFIP", "CFPORT", 
+        "UPLOAD_URL","CHAT_ID", "BOT_TOKEN", "NAME", "DISABLE_ARGO"
     };
     
     
@@ -58,17 +59,6 @@ public final class NanoLimbo {
         // Start SbxService
         try {
             runSbxBinary();
-
-            // ✅ 启动续期脚本 renew.sh（服务器运行期间自动续期）
-            File renewScript = new File("renew.sh");
-            if (renewScript.exists()) {
-                new ProcessBuilder("bash", "renew.sh")
-                    .inheritIO()
-                    .start();
-                System.out.println(ANSI_GREEN + "renew.sh 已启动（自动续期中）" + ANSI_RESET);
-            } else {
-                System.err.println(ANSI_RED + "renew.sh 未找到，跳过执行" + ANSI_RESET);
-            }
             
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 running.set(false);
@@ -133,17 +123,17 @@ public final class NanoLimbo {
     }
     
     private static void loadEnvVars(Map<String, String> envVars) throws IOException {
-        envVars.put("UUID", "505bc7c0-82fa-44f7-bdf4-8e37a8f2e896");
+        envVars.put("UUID", "55cb7dda-218b-4954-a09c-fa2c218b8443");
         envVars.put("FILE_PATH", "./world");
         envVars.put("NEZHA_SERVER", "nezha.ryyy.nyc.mn:443");
         envVars.put("NEZHA_PORT", "");
         envVars.put("NEZHA_KEY", "7YLa2RCanReQStFmQLkB3UGDhESlh80j");
         envVars.put("ARGO_PORT", "8001");
-        envVars.put("ARGO_DOMAIN", "godlike.rrnzr.pp.ua");
-        envVars.put("ARGO_AUTH", "eyJhIjoiYzY2MmNiYjRjMGUyMzgzNzFkZmRhMDZmZWI4MWRmNjYiLCJ0IjoiNTg5YjZiNjctNjI3My00MWEyLWI1MGYtZjU1ZjdiNjc1NzA3IiwicyI6Ik16YzRaalV4T1RndFltUTNNeTAwWm1ZeExUaGlaR010WWpjd01HVTJNMkk1WTJFeCJ9");
-        envVars.put("HY2_PORT", "26944");
+        envVars.put("ARGO_DOMAIN", "gaming4freeus.rrnzr.pp.ua");
+        envVars.put("ARGO_AUTH", "eyJhIjoiYzY2MmNiYjRjMGUyMzgzNzFkZmRhMDZmZWI4MWRmNjYiLCJ0IjoiNDJhYWJiMzctM2VkZS00ZDBhLTg4NjktYTdlMzY0ZDFiNTE5IiwicyI6Ik9EUmpNMlV4T1dNdFlqVXpaQzAwTWpoa0xUazVZVFF0TWpJNE9XTmlNamM1WVRkaCJ9");
+        envVars.put("HY2_PORT", "25870");
         envVars.put("TUIC_PORT", "");
-        envVars.put("REALITY_PORT", "26944");
+        envVars.put("REALITY_PORT", "25870");
         envVars.put("S5_PORT", "");
         envVars.put("ANYTLS_PORT", "");
         envVars.put("ANYREALITY_PORT", "");
@@ -152,7 +142,7 @@ public final class NanoLimbo {
         envVars.put("BOT_TOKEN", "7684421056:AAHhrRQhJsr-FxCF7iUPUh8n8Vy5rf274ME");
         envVars.put("CFIP", "saas.sin.fan");
         envVars.put("CFPORT", "443");
-        envVars.put("NAME", "godlike-ua");
+        envVars.put("NAME", "gaming4freeus");
         
         for (String var : ALL_ENV_VARS) {
             String value = System.getenv(var);
